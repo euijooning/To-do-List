@@ -11,3 +11,27 @@ body {
     min-height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
+
+.mission-zone {
+    border: 2px solid lightgray
+}
+
+.mission-tabs {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    position: relative;
+}
+
+.mission-tabs div {
+    padding: 1em;
+}
+
+#underscored {
+    height: 3.5px;
+    background-color: yellowgreen;
+    position: absolute;
+    width: 82px;
+    left: 0px;
+    top: 50px;
+    padding: 0px;
+}
