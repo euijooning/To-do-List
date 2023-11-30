@@ -37,13 +37,24 @@ function addMission() {
 function render() {
     let resultHTML = '';
     for(let i=0; i<missionList.length; i++) {
-        resultHTML += `<div class="missions">
-        <div>${missionList[i].missionDetails}</div>
-        <div>
-            <button onclick="toggleChecked('${missionList[i].id}')">Check</button>
-            <button>Delete</button>
-        </div>
-    </div>`
+        if(missionList[i].isComplete == true) {
+            resultHTML += `<div class="missions">
+            <div class = "mission-completed">${missionList[i].missionDetails}</div>
+            <div>
+                <button onclick="toggleChecked('${missionList[i].id}')">Check</button>
+                <button>Delete</button>
+            </div>
+        </div>`
+        }
+        else {
+            resultHTML += `<div class="missions">
+            <div>${missionList[i].missionDetails}</div>
+            <div>
+                <button onclick="toggleChecked('${missionList[i].id}')">Check</button>
+                <button>Delete</button>
+            </div>
+        </div>`
+        }
     }
     document.getElementById("mission-board").innerHTML = resultHTML;
 }
@@ -57,7 +68,8 @@ function toggleChecked(id) {
             break;
         }
     }
-    console.log(missionList);
+    render();
+    // console.log(missionList);
 }
 
 function generateRandomID() {
