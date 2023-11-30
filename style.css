@@ -10,8 +10,47 @@ body {
     /* background-color: #F4EEB1; */
     background-color: beige;
     min-height: 100vh;
+    height: 100%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     max-width: 800px;
+}
+
+.input-area {
+    position: relative;
+}
+
+.mission-input {
+    transition: padding-top 0.2s ease, margin-top 0.2s ease;
+    width: 80%;
+    border: none;
+    border: 1px solid blanchedalmond;
+}
+
+.mission-input:focus {
+    outline: none;
+    border-bottom: 3px solid blanchedalmond;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    transition: 0.5s;
+    padding-top: 35px;
+}
+  
+.mission-input + label > span {
+    font-weight: 300;
+    margin: 0;
+    position: absolute;
+    color: #8f8f8f;
+    font-size: 14px;
+    top: 6px;
+    left: 10px;
+    -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+    transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+  
+.mission-input:focus + label > span {
+    top: 0px;
+    color: #333;
 }
 
 .add-button {
@@ -81,4 +120,9 @@ body {
 }
 .fa-undo-alt {
   color: lightslategray;
+}
+.mission-completed {
+    text-decoration: line-through;
+    background-color: lightgray;
+    transition: 0.5s;
 }
