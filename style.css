@@ -31,13 +31,14 @@ body {
 
 .mission-tabs div {
     padding: 1em;
+    cursor: pointer;
 }
 
 #underscored {
-    height: 3.5px;
+    height: 5px;
     background-color: yellowgreen;
     position: absolute;
-    width: 82px;
+    width: 60px;
     left: 0px;
     top: 50px;
     padding: 0px;
