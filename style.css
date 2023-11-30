@@ -107,10 +107,6 @@ body {
     padding: 1em;
 }
 
-.mission-completed {
-    text-decoration: line-through;
-}
-
 .fa-check {
     color: limegreen;
 }
@@ -121,7 +117,7 @@ body {
 .fa-undo-alt {
   color: lightslategray;
 }
-.mission-completed {
+.completed-missions {
     text-decoration: line-through;
     background-color: lightgray;
     transition: 0.5s;
