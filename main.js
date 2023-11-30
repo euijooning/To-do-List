@@ -30,7 +30,7 @@ function addMission() {
     };
     missionList.push(mission);
     render();
-    console.log(missionList)
+    console.log(missionList);
 }
 
 
@@ -42,7 +42,7 @@ function render() {
             <div class = "mission-completed">${missionList[i].missionDetails}</div>
             <div>
                 <button onclick="toggleChecked('${missionList[i].id}')">Check</button>
-                <button>Delete</button>
+                <button onclick="deleteMission('${missionList[i].id}')">Delete</button>
             </div>
         </div>`
         }
@@ -51,7 +51,7 @@ function render() {
             <div>${missionList[i].missionDetails}</div>
             <div>
                 <button onclick="toggleChecked('${missionList[i].id}')">Check</button>
-                <button>Delete</button>
+                <button onclick="deleteMission('${missionList[i].id}')">Delete</button>
             </div>
         </div>`
         }
@@ -64,14 +64,24 @@ function toggleChecked(id) {
     // console.log("id: ", id);
     for(let i = 0; i<missionList.length; i++) {
         if(missionList[i].id == id) {
-            missionList[i].isComplete = true; // true로 변경
+            missionList[i].isComplete = !missionList[i].isComplete;
             break;
         }
     }
     render();
-    // console.log(missionList);
 }
 
 function generateRandomID() {
     return Math.random().toString(36).substr(2, 12);
+}
+
+// Delete 버튼을 누르면 할일이 삭제된다.
+function deleteMission(id) {
+    for(let i = 0; i<missionList.length; i++) {
+        if(missionList[i].id == id) {
+            missionList.splice(i,1);
+            break;
+        }
+    }    
+    render();
 }
