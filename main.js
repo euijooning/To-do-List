@@ -20,4 +20,21 @@ addButton.addEventListener("click", addMission); // 클릭 이벤트 추가
 function addMission() {
     let missionDetails = missionInput.value;
     missionList.push(missionDetails);
+    render();
+}
+
+
+function render() {
+    let resultHTML = '';
+    for(let i=0; i<missionList.length; i++) {
+        resultHTML += `<div class="missions">
+        <div>${missionList[i]}</div>
+        <div>
+            <button>Check</button>
+            <button>Delete</button>
+        </div>
+    </div>`
+    }
+
+    document.getElementById("mission-board").innerHTML = resultHTML;
 }
