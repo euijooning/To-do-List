@@ -18,9 +18,14 @@ let missionList = [];
 addButton.addEventListener("click", addMission); // 클릭 이벤트 추가
 
 function addMission() {
-    let missionDetails = missionInput.value;
-    missionList.push(missionDetails);
+    // 각 임무들이 완료되었는지 진행중인지 상태 정보를 알고 있어야 하므로 객체를 활용
+    let mission = {
+        missionDetails: missionInput.value,
+        isComplete: false
+    };
+    missionList.push(mission);
     render();
+    console.log(missionList)
 }
 
 
@@ -28,7 +33,7 @@ function render() {
     let resultHTML = '';
     for(let i=0; i<missionList.length; i++) {
         resultHTML += `<div class="missions">
-        <div>${missionList[i]}</div>
+        <div>${missionList[i].missionDetails}</div>
         <div>
             <button>Check</button>
             <button>Delete</button>
