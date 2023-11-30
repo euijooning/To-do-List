@@ -25,6 +25,9 @@ addButton.addEventListener("click", addMission); // 클릭 이벤트 추가
 
 let category = 'all-mission'; //초기값
 let filterList = []; // 전역으로 변경
+let list = [];
+
+let underScored = document.getElementById("tab-underScored");
 
 for(let i = 1; i<tabs.length; i++) {
     tabs[i].addEventListener("click", function(event){filter(event)})
@@ -36,7 +39,7 @@ function addMission() {
     // 어떤 임무인지 알아야 하므로 id 만들어서 부여
     let mission = {
         id: generateRandomID(),
-        missionDetails: missionInput.value,
+        missionInput: missionInput.value,
         isComplete: false
     };
     missionList.push(mission);
@@ -48,53 +51,44 @@ function addMission() {
 function render() {
     // 1. 내가 선택한 탭에 따라서
     // 2. 리스트를 달리 보여준다.
-    let list = [];
+    let result = "";
+    list = [];
     if(category === "all-mission") {
         list = missionList;
     } else if(category === "in-progress" || category === "completed-mission") {
         list = filterList;
     }
     
-    let resultHTML = '';
-    for(let i=0; i<list.length; i++) {
-        if(list[i].isComplete == true) {
-            resultHTML += `<div class="missions">
-            <div class = "mission-completed">${list[i].missionDetails}</div>
-            <div>
-                <button onclick="toggleChecked('${list[i].id}')">Check</button>
-                <button onclick="deleteMission('${list[i].id}')">Delete</button>
-            </div>
-        </div>`
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].isComplete == true) {
+          result += `<div class="missions mission-completed" id="${list[i].id}">
+                    <span>${list[i].missionDetails}</span> 
+                    <div class="button-box">
+                    <button onclick="toggleChecked('${list[i].id}')"><i class="fas fa-undo-alt"></i></button>
+                    <button onclick="deleteMission('${list[i].id}')"><i class="fa fa-trash"></i></button>
+                    </div>
+                </div>`;
+        } else {
+          result += `<div class="missions" id="${list[i].id}">
+                    <span>${list[i].missionDetails}</span>
+                    <div class="button-box">
+                    <button onclick="toggleChecked('${list[i].id}')"><i class="fa fa-check"></i></button>
+                    <button onclick="deleteMission('${list[i].id}')"><i class="fa fa-trash"></i></button>
+                </div>`;
         }
-        else {
-            resultHTML += `<div class="missions">
-            <div>${list[i].missionDetails}</div>
-            <div>
-                <button onclick="toggleChecked('${list[i].id}')">Check</button>
-                <button onclick="deleteMission('${list[i].id}')">Delete</button>
-            </div>
-        </div>`
-        }
-    }
-    document.getElementById("mission-board").innerHTML = resultHTML;
+      }
+    document.getElementById("mission-board").innerHTML = result;
 }
 
 
 function toggleChecked(id) {
-    // console.log("id: ", id);
     for(let i = 0; i<missionList.length; i++) {
-        if(missionList[i].id == id) {
+        if(missionList[i].id === id) {
             missionList[i].isComplete = !missionList[i].isComplete;
-            updateFilterList();
             break;
         }
     }
-    render();
-}
-
-
-function updateFilterList() {
-    filterList = missionList.filter(mission => !mission.isComplete);
+    filter();
 }
 
 // Delete 버튼을 누르면 할일이 삭제된다.
@@ -105,19 +99,23 @@ function deleteMission(id) {
             break;
         }
     }    
-    render();
+    filter();
 }
 
 
 function filter(event) {
     console.log("filter", event.target.id);
-    filterList = [];
-    category = event.target.id;
-    if(category == "all-mission") { 
-        // 전체 리스트를 보여준다.
-        render();
-    }     
-     else if(category == "in-progress") {
+    if (event) {
+        category = event.target.id;
+        underScored.style.width = event.target.offsetWidth + "px";
+        underScored.style.left = event.target.offsetLeft + "px";
+        underScored.style.top =
+          event.target.offsetTop + (event.target.offsetHeight - 4) + "px";
+      } // 진행중 상태에서 끝남으로 표시하면 바로 사라지는 부분은 event가 없음 그래서 조건추가
+    }
+
+    filterList = [];  
+    if(category == "in-progress") {
         // 진행중인 과업 리스트를 보여준다.
         // mission.isComplete=false
         for(let i = 0; i<missionList.length; i++) {
@@ -125,21 +123,19 @@ function filter(event) {
                 filterList.push(missionList[i]);
             }
         }
-        render();
-        console.log("진행중", filterList)
     }
      else if(category =="completed-mission") {
         // 완료된 리스크를 보여준다.
         // mission.isComplete=true
         for(let i = 0; i<missionList.length; i++) {
-            if(missionList.isComplete === true) {
+            if(missionList[i].isComplete) {
                 filterList.push(missionList[i]);
             }
         }
         render();
     }
+    
 
-}
 
 function generateRandomID() {
     return Math.random().toString(36).substr(2, 12);

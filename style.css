@@ -3,6 +3,7 @@ body {
     background-image: url("images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: "Rajdhani", sans-serif;
 }
 
 .container {
@@ -10,23 +11,33 @@ body {
     background-color: beige;
     min-height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    max-width: 800px;
 }
 
-#add-button {
+.add-button {
     background-color: yellowgreen;
     color: white;
     cursor: pointer; /* 마우스 커서를 포인터로 변경하여 사용자에게 클릭 가능성을 나타냄 */
 }
+.add-button:hover {
+    background-color: aquamarine;
+}
+.add-button:active {
+    background-color: azure;
+    box-shadow
+    : -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
+    transform: translateY(0.125rem);
+}
 
-.mission-zone {
+.mission-zone-container {
     border: 2px solid lightgray;
     margin-top: 10px;
+    position: relative;
 }
 
 .mission-tabs {
     display: flex;
     border-bottom: 1px solid lightgray;
-    position: relative;
 }
 
 .mission-tabs div {
@@ -34,22 +45,40 @@ body {
     cursor: pointer;
 }
 
-#underscored {
-    height: 5px;
+#tab-underscored {
+    height: 5px !important;
     background-color: yellowgreen;
     position: absolute;
-    width: 60px;
+    top: 52px;
     left: 0px;
-    top: 50px;
+    width: 48px;
+    transition: 0.5s;
     padding: 0px;
 }
 
 .missions {
     display: flex;
     justify-content: space-between; /*간격 띄우기*/
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    position: relative;
+}
+
+.mission-span {
     padding: 1em;
 }
 
 .mission-completed {
     text-decoration: line-through;
+}
+
+.fa-check {
+    color: limegreen;
+}
+  
+.fa-trash {
+  color: red;
+}
+.fa-undo-alt {
+  color: lightslategray;
 }
