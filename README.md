@@ -5,4 +5,4 @@
  🚀 https://ej-todo.netlify.app/
 
 ### 시연 영상
- 📺 https://www.youtube.com/watch?v=QtKfM2ACl6M
+ 📺 https://youtu.be/8MKJjF9z0js
